@@ -1,0 +1,35 @@
+<script>
+  const print = (dateArray, div) => {
+    const prettyDates = dateArray;
+    div = div ||  document.getElementById('dateDiv');
+    div.innerHTML = prettyDates;
+  }
+
+  const date = new Date();
+
+  /** */
+  const nDays = (start, back=true, n=7) => {
+    const retVal = [];
+
+    for(let i = 0; i < n; i++) {
+      const d = new Date(start);
+      const o = back ? d.getDate() - i : d.getDate() + i;
+      d.setDate(o);
+      retVal.push(d);
+    }
+
+    const o = back ? date.getDate() - n : date.getDate() + n;
+    date.setDate(o);  // track last date
+
+    return retVal;
+  }
+</script>
+
+<div>
+  <div id="dateDiv">hmmm...</div>
+  <br>
+  <button onclick="print(nDays(date));"><<</button> 
+  <button onclick="print(nDays(date, false));">>></button>
+</div>
+
+
